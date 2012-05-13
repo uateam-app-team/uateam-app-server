@@ -9,6 +9,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.xitxer.uateam.notification.model.EpisodeEntry;
+
 public class Main {
 	public static final String URL = "http://uateam.tv/";
 	public static double GOLDEN_RATIO = 1.61803399;
@@ -43,5 +45,6 @@ public class Main {
 	public static void main(String[] args) {
 		Element element = getDocument().getElementById("ja-col2");
 		System.out.println(element);
+		System.out.println(new EpisodeEntry());
 	}
 }
