@@ -11,7 +11,6 @@ public class EpisodeEntry implements Comparable<EpisodeEntry> {
 	public EpisodeEntry(EpisodeEntry that) {
 		super();
 		setSeriesTitle(that.seriesTitle);
-		setNumericTitle(that.numericTitle);
 		setEpisodeTitle(that.episodeTitle);
 		setSeasonNumber(that.seasonNumber);
 		setEpisodeNumber(that.episodeNumber);
@@ -19,14 +18,15 @@ public class EpisodeEntry implements Comparable<EpisodeEntry> {
 		setTorrent(that.torrent);
 		setTorrentHd(that.torrentHd);
 		setWatchOnline(that.watchOnline);
+		setCategory(that.category);
 	}
 
 	private String seriesTitle;
-	private String numericTitle;
 	private String episodeTitle;
 	private int seasonNumber;
 	private int episodeNumber;
 
+	private String category;
 	private String details;
 	private String torrent;
 	private String torrentHd;
@@ -38,14 +38,6 @@ public class EpisodeEntry implements Comparable<EpisodeEntry> {
 
 	public void setSeriesTitle(String seriesTitle) {
 		this.seriesTitle = seriesTitle;
-	}
-
-	public String getNumericTitle() {
-		return numericTitle;
-	}
-
-	public void setNumericTitle(String numericTitle) {
-		this.numericTitle = numericTitle;
 	}
 
 	public String getEpisodeTitle() {
@@ -60,8 +52,8 @@ public class EpisodeEntry implements Comparable<EpisodeEntry> {
 		return seasonNumber;
 	}
 
-	public void setSeasonNumber(int seriesNumber) {
-		this.seasonNumber = seriesNumber;
+	public void setSeasonNumber(int seasonNumber) {
+		this.seasonNumber = seasonNumber;
 	}
 
 	public int getEpisodeNumber() {
@@ -70,6 +62,14 @@ public class EpisodeEntry implements Comparable<EpisodeEntry> {
 
 	public void setEpisodeNumber(int episodeNumber) {
 		this.episodeNumber = episodeNumber;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getDetails() {
@@ -115,30 +115,31 @@ public class EpisodeEntry implements Comparable<EpisodeEntry> {
 		EpisodeEntry that = (EpisodeEntry) obj;
 		return Objects.equal(this.seriesTitle, that.seriesTitle)
 				&& Objects.equal(this.seasonNumber, that.seasonNumber)
-				&& Objects.equal(this.numericTitle, that.numericTitle)
 				&& Objects.equal(this.episodeTitle, that.episodeTitle)
 				&& Objects.equal(this.episodeNumber, that.episodeNumber)
+				&& Objects.equal(this.category, that.category)
 				&& Objects.equal(this.details, that.details)
-				&& Objects.equal(this.torrent, that.torrentHd)
+				&& Objects.equal(this.torrent, that.torrent)
+				&& Objects.equal(this.torrentHd, that.torrentHd)
 				&& Objects.equal(this.watchOnline, that.watchOnline);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(seriesTitle, episodeTitle, numericTitle,
-				seasonNumber, episodeNumber, details, torrent, torrentHd,
+		return Objects.hashCode(seriesTitle, episodeTitle, seasonNumber,
+				episodeNumber, category, details, torrent, torrentHd,
 				watchOnline);
 	}
 
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this).add("Series title", seriesTitle)
-				.add("Numeric title", numericTitle)
 				.add("Episode title", episodeTitle)
 				.add("Season number", seasonNumber)
-				.add("Episode Number", episodeNumber).add("Details", details)
-				.add("Torrent", torrent).add("Torrent HD", torrentHd)
-				.add("Watch online", watchOnline).toString();
+				.add("Episode Number", episodeNumber).add("Category", category)
+				.add("Details", details).add("Torrent", torrent)
+				.add("Torrent HD", torrentHd).add("Watch online", watchOnline)
+				.toString();
 	}
 
 	@Override
@@ -148,16 +149,11 @@ public class EpisodeEntry implements Comparable<EpisodeEntry> {
 		if (o == null)
 			return 1;
 		return ComparisonChain.start().compare(seriesTitle, o.seriesTitle)
-				.compare(numericTitle, o.numericTitle)
 				.compare(episodeTitle, o.episodeTitle)
 				.compare(seasonNumber, o.seasonNumber)
 				.compare(episodeNumber, o.episodeNumber)
-				.compare(details, o.details).compare(torrent, o.torrent)
-				.compare(torrentHd, o.torrentHd)
+				.compare(category, o.category).compare(details, o.details)
+				.compare(torrent, o.torrent).compare(torrentHd, o.torrentHd)
 				.compare(watchOnline, o.watchOnline).result();
-	}
-
-	public static void main(String[] args) {
-		System.out.println(new EpisodeEntry());
 	}
 }
