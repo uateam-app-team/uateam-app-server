@@ -1,1 +1,6 @@
 *.class
+war/WEB-INF/classes/
+war/WEB-INF/appengine-generated/
+/war/WEB-INF/classes/META-INF
+/war/WEB-INF/classes/log4j.properties
+/war/WEB-INF/classes/META-INF/jdoconfig.xml
