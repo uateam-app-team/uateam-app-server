@@ -1,4 +1,4 @@
-package com.xitxer.uateam.notification.server.parser;
+package com.xitxer.uateam.notification.server.parser.sitesource;
 
 import java.io.IOException;
 

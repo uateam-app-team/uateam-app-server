@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 
 import com.xitxer.uateam.notification.server.model.ReleaseEntry;
 import com.xitxer.uateam.notification.server.parser.exceptions.HtmlLayoutChangedException;
+import com.xitxer.uateam.notification.server.parser.sitesource.SiteSource;
 
 public class RecentReleasesParser {
 
@@ -33,7 +34,7 @@ public class RecentReleasesParser {
 		return check(siteSource.getDocument().select(DIV_FRESHRELEASE));
 	}
 
-	public List<ReleaseEntry> getRecent() throws HtmlLayoutChangedException,
+	public List<ReleaseEntry> get() throws HtmlLayoutChangedException,
 			IOException {
 		ReleaseEntryFiller filler = new ReleaseEntryFiller();
 		List<ReleaseEntry> episodeEntries = new ArrayList<ReleaseEntry>();

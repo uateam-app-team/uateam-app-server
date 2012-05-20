@@ -1,4 +1,4 @@
-package com.xitxer.uateam.notification.server.parser;
+package com.xitxer.uateam.notification.server.parser.sitesource;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -27,11 +27,16 @@ public class HttpSiteSource implements SiteSource {
 	@Override
 	public Document getDocument() throws IOException {
 		Document document = null;
+		long startTime = System.currentTimeMillis();
 		while (document == null) {
 			try {
 				document = Jsoup.parse(new URL(url).openStream(), "utf-8", url);
 			} catch (SocketTimeoutException e) {
 				e.printStackTrace();
+				if (System.currentTimeMillis() - startTime > TIMEOUT) {
+					e.fillInStackTrace();
+					throw e;
+				}
 			} catch (IOException e) {
 				e.fillInStackTrace();
 				throw e;

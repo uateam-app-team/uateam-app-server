@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xitxer.uateam.notification.server.model.ReleaseEntry;
-import com.xitxer.uateam.notification.server.parser.HttpSiteSource;
 import com.xitxer.uateam.notification.server.parser.RecentReleasesParser;
+import com.xitxer.uateam.notification.server.parser.sitesource.HttpSiteSource;
 
 @SuppressWarnings("serial")
 public class OnlineParserTest extends HttpServlet {
@@ -24,7 +24,7 @@ public class OnlineParserTest extends HttpServlet {
 		PrintWriter printWriter = resp.getWriter();
 		try {
 			List<ReleaseEntry> episodeEntries = new RecentReleasesParser(
-					new HttpSiteSource(URL)).getRecent();
+					new HttpSiteSource(URL)).get();
 			for (ReleaseEntry releaseEntry : episodeEntries) {
 				printWriter.println(releaseEntry);
 			}
