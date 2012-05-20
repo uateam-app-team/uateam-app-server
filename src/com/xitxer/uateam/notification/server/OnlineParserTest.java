@@ -27,8 +27,11 @@ public class OnlineParserTest extends HttpServlet {
 					.getRecent();
 			String json = new Gson().toJson(episodeEntries);
 			resp.setContentType("text/plain");
+			resp.setCharacterEncoding("utf-8");
 			resp.getWriter().println(json);
 		} catch (HtmlLayoutChangedException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
