@@ -1,17 +1,16 @@
 package com.xitxer.uateam.notification.server;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.xitxer.uateam.notification.server.model.ReleaseEntry;
 import com.xitxer.uateam.notification.server.parser.HttpSiteSource;
 import com.xitxer.uateam.notification.server.parser.RecentReleasesParser;
-import com.xitxer.uateam.notification.server.parser.exceptions.HtmlLayoutChangedException;
 
 @SuppressWarnings("serial")
 public class OnlineParserTest extends HttpServlet {
@@ -20,19 +19,17 @@ public class OnlineParserTest extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-
-		List<ReleaseEntry> episodeEntries;
+		resp.setContentType("text/plain");
+		resp.setCharacterEncoding("utf-8");
+		PrintWriter printWriter = resp.getWriter();
 		try {
-			episodeEntries = new RecentReleasesParser(new HttpSiteSource(URL))
-					.getRecent();
-			String json = new Gson().toJson(episodeEntries);
-			resp.setContentType("text/plain");
-			resp.setCharacterEncoding("utf-8");
-			resp.getWriter().println(json);
-		} catch (HtmlLayoutChangedException e) {
-			e.printStackTrace();
+			List<ReleaseEntry> episodeEntries = new RecentReleasesParser(
+					new HttpSiteSource(URL)).getRecent();
+			for (ReleaseEntry releaseEntry : episodeEntries) {
+				printWriter.println(releaseEntry);
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(printWriter);
 		}
 	}
 }
