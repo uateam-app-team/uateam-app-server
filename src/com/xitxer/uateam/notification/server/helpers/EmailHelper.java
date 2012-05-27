@@ -17,7 +17,9 @@ public class EmailHelper {
 	}
 
 	public static final String ADMINS = "admins";
-	public static final String MY_ADDRESS = "zipu4.post@gmail.com";
+	public static final String MY_ADDRESS = "z" + "i" + "p" + "u" + "4" + "."
+			+ "p" + "o" + "s" + "t" + "@" + "g" + "m" + "a" + "i" + "l" + "."
+			+ "c" + "o" + "m";
 	public static final String MY_TITLE = "uateam-notifier admin";
 
 	public static void sendEmailException(Throwable throwable) {
