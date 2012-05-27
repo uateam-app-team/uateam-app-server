@@ -7,8 +7,8 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 
 	private String group;
 	private String release;
-	private int season;
-	private int episode;
+	private long season;
+	private long episode;
 
 	private String groupLink;
 	private String detailsLink;
@@ -50,19 +50,19 @@ public class ReleaseEntry implements Comparable<ReleaseEntry> {
 		this.release = release;
 	}
 
-	public int getSeason() {
+	public long getSeason() {
 		return season;
 	}
 
-	public void setSeason(int season) {
+	public void setSeason(long season) {
 		this.season = season;
 	}
 
-	public int getEpisode() {
+	public long getEpisode() {
 		return episode;
 	}
 
-	public void setEpisode(int episode) {
+	public void setEpisode(long episode) {
 		this.episode = episode;
 	}
 

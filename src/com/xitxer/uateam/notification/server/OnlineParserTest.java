@@ -32,5 +32,6 @@ public class OnlineParserTest extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace(printWriter);
 		}
+		printWriter.println(new ReleaseEntry().equals(new ReleaseEntry()));
 	}
 }

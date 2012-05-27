@@ -21,20 +21,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/online_parser_and_send_email_test</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>CronSimpleTask</servlet-name>
-		<servlet-class>com.xitxer.uateam.notification.server.CronSimpleTask</servlet-class>
+		<servlet-name>CronRecentReleaseParser</servlet-name>
+		<servlet-class>com.xitxer.uateam.notification.server.CronRecentReleaseParser</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>CronSimpleTask</servlet-name>
-		<url-pattern>/cron_simple_task</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>CronSimpleTaskTest</servlet-name>
-		<servlet-class>com.xitxer.uateam.notification.server.CronSimpleTaskTest</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>CronSimpleTaskTest</servlet-name>
-		<url-pattern>/cron_simple_task_test</url-pattern>
+		<servlet-name>CronRecentReleaseParser</servlet-name>
+		<url-pattern>/cron_recent_release_parser</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

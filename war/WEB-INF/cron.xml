@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cronentries>
 	<cron>
-		<url>/cron_simple_task</url>
-		<description>Renew timer every 2 minutes</description>
-		<schedule>every 2 minutes</schedule>
+		<url>/cron_recent_release_parser</url>
+		<description>Renew timer every 10 minutes</description>
+		<schedule>every 10 minutes</schedule>
 	</cron>
 </cronentries>
