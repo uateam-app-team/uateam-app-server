@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -18,10 +17,6 @@ public class HttpSiteSource implements SiteSource {
 
 	public HttpSiteSource(String url) {
 		this.url = url;
-	}
-
-	protected Connection getConnection() {
-		return Jsoup.connect(url).userAgent(USER_AGENT).timeout(TIMEOUT);
 	}
 
 	@Override

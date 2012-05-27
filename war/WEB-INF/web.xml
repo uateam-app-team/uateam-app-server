@@ -8,9 +8,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>OnlineParserTest</servlet-name>
 		<servlet-class>com.xitxer.uateam.notification.server.OnlineParserTest</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>OnlineParserAndSendEmailTest</servlet-name>
+		<servlet-class>com.xitxer.uateam.notification.server.OnlineParserAndSendEmailTest</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>OnlineParserTest</servlet-name>
 		<url-pattern>/online_parser_test</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OnlineParserAndSendEmailTest</servlet-name>
+		<url-pattern>/online_parser_and_send_email_test</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

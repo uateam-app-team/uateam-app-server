@@ -8,14 +8,14 @@ import com.xitxer.uateam.notification.server.parser.exceptions.HtmlLayoutChanged
 
 public class ReleaseEntryFiller {
 
-	public static final String TAG_A = "a";
-	public static final String TAG_HR = "hr";
-	public static final String TAG_DIV = "div";
-	public static final String TAG_P = "P";
-	public static final String TAG_SPAN = "span";
+	private static final String TAG_A = "a";
+	private static final String TAG_DIV = "div";
+	private static final String TAG_P = "P";
+	private static final String TAG_SPAN = "span";
 
-	public static final String ATTR_HREF = "href";
-	public static final String ATTR_SRC = "src";
+	private static final String ATTR_HREF = "href";
+
+	private static final String REGEXP_REALEASE_NUMBERS = "\\.";
 
 	private ReleaseEntry episodeEntry = new ReleaseEntry();
 
@@ -26,9 +26,9 @@ public class ReleaseEntryFiller {
 			if (TAG_DIV.equalsIgnoreCase(element.tagName())) {
 				try {
 					episodeEntry.setSeason(Integer.parseInt(element.text()
-							.split("\\.")[0]));
+							.split(REGEXP_REALEASE_NUMBERS)[0]));
 					episodeEntry.setEpisode(Integer.parseInt(element.text()
-							.split("\\.")[1]));
+							.split(REGEXP_REALEASE_NUMBERS)[1]));
 				} catch (Exception e) {
 					// do nothing because can be not series release
 				}
@@ -37,9 +37,9 @@ public class ReleaseEntryFiller {
 			Elements titleElements = elements.select(TAG_SPAN);
 			episodeEntry.setGroup(titleElements.get(0).text());
 			episodeEntry.setRelease(titleElements.get(1).text());
-			Elements linkelements = elements.select(TAG_A);
-			episodeEntry.setGroupLink(linkelements.get(0).attr(ATTR_HREF));
-			episodeEntry.setDetailsLink(linkelements.get(1).attr(ATTR_HREF));
+			Elements linkElements = elements.select(TAG_A);
+			episodeEntry.setGroupLink(linkElements.get(0).attr(ATTR_HREF));
+			episodeEntry.setDetailsLink(linkElements.get(1).attr(ATTR_HREF));
 			return true;
 		} catch (Exception e) {
 			HtmlLayoutChangedException exception = new HtmlLayoutChangedException(
