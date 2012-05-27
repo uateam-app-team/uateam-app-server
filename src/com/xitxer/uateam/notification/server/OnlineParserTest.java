@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,20 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.xitxer.uateam.notification.server.model.ReleaseEntry;
 import com.xitxer.uateam.notification.server.parser.RecentReleasesParser;
 import com.xitxer.uateam.notification.server.parser.sitesource.HttpSiteSource;
+import com.xitxer.uateam.notification.server.utils.UateamSiteUtils;
 
 @SuppressWarnings("serial")
 public class OnlineParserTest extends HttpServlet {
-	public static final String URL = "http://uateam.tv/";
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
+			throws IOException, ServletException {
 		resp.setContentType("text/plain");
 		resp.setCharacterEncoding("utf-8");
 		PrintWriter printWriter = resp.getWriter();
 		try {
 			List<ReleaseEntry> episodeEntries = new RecentReleasesParser(
-					new HttpSiteSource(URL)).get();
+					new HttpSiteSource(UateamSiteUtils.URL_BASE)).get();
 			for (ReleaseEntry releaseEntry : episodeEntries) {
 				printWriter.println(releaseEntry);
 			}
