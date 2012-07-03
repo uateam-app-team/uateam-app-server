@@ -59,8 +59,11 @@ public class CronRecentReleaseParser extends HttpServlet {
 				}
 			}
 			if (!releasesToInform.isEmpty()) {
-				EmailHelper.sendEmailMe("New Releases",
-						new Gson().toJson(releasesToInform));
+				String subject = "New Releases", message = new Gson()
+						.toJson(releasesToInform);
+				EmailHelper.sendEmailMe(subject, message);
+				EmailHelper.sendEmail(EmailHelper.PARTNER_ADDRESS,
+						EmailHelper.PARTNER_ADDRESS, subject, message);
 			}
 		} catch (Exception e) {
 			EmailHelper.sendEmailException(e);

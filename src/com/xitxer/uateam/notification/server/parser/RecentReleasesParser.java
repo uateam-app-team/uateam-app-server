@@ -31,16 +31,18 @@ public class RecentReleasesParser {
 
 	private Elements getContentElements() throws IOException,
 			HtmlLayoutChangedException {
-		return check(siteSource.getDocument().select(DIV_FRESHRELEASE));
+		return check(siteSource.getRootPage().select(DIV_FRESHRELEASE));
 	}
 
 	public List<ReleaseEntry> get() throws HtmlLayoutChangedException,
 			IOException {
 		ReleaseEntryFiller filler = new ReleaseEntryFiller();
 		List<ReleaseEntry> episodeEntries = new ArrayList<ReleaseEntry>();
+		ReleaseEntry releaseEntry;
 		for (Element element : getContentElements()) {
 			if (filler.parse(element)) {
-				episodeEntries.add(filler.refresh());
+				releaseEntry = filler.refresh();
+				episodeEntries.add(releaseEntry);
 			}
 		}
 		return episodeEntries;

@@ -13,14 +13,17 @@ public class HttpSiteSource implements SiteSource {
 			+ "Chrome/18.0.1025.168 Safari/535.19";
 	protected static final int TIMEOUT = 60000;
 
-	protected String url;
+	protected String baseUrl;
 
 	public HttpSiteSource(String url) {
-		this.url = url;
+		this.baseUrl = url;
 	}
 
-	@Override
-	public Document getDocument() throws IOException {
+	private String getUrl(String subUrl) {
+		return baseUrl + subUrl;
+	}
+
+	private Document getDocument(String url) throws IOException {
 		Document document = null;
 		long startTime = System.currentTimeMillis();
 		while (document == null) {
@@ -38,5 +41,15 @@ public class HttpSiteSource implements SiteSource {
 			}
 		}
 		return document;
+	}
+
+	@Override
+	public Document getRootPage() throws IOException {
+		return getDocument(baseUrl);
+	}
+
+	@Override
+	public Document getSubPage(String subUrl) throws IOException {
+		return getDocument(getUrl(subUrl));
 	}
 }
