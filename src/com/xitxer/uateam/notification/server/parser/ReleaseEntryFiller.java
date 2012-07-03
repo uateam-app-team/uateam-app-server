@@ -1,10 +1,15 @@
 package com.xitxer.uateam.notification.server.parser;
 
+import java.io.IOException;
+
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.xitxer.uateam.notification.server.model.ReleaseEntry;
 import com.xitxer.uateam.notification.server.parser.exceptions.HtmlLayoutChangedException;
+import com.xitxer.uateam.notification.server.parser.exceptions.PageNotAvailableException;
+import com.xitxer.uateam.notification.server.parser.sitesource.SiteSource;
 
 public class ReleaseEntryFiller {
 
@@ -44,6 +49,19 @@ public class ReleaseEntryFiller {
 		} catch (Exception e) {
 			HtmlLayoutChangedException exception = new HtmlLayoutChangedException(
 					"Unknown change: " + e.toString());
+			exception.setStackTrace(e.getStackTrace());
+			throw exception;
+		}
+	}
+
+	public void parseReleaseLinks(SiteSource siteSource)
+			throws PageNotAvailableException {
+		try {
+			Document document = siteSource.getSubPage(episodeEntry
+					.getDetailsLink());
+		} catch (IOException e) {
+			PageNotAvailableException exception = new PageNotAvailableException(
+					"Sub page not found: " + episodeEntry.getDetailsLink());
 			exception.setStackTrace(e.getStackTrace());
 			throw exception;
 		}

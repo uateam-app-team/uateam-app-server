@@ -5,5 +5,7 @@ import java.io.IOException;
 import org.jsoup.nodes.Document;
 
 public interface SiteSource {
-	Document getDocument() throws IOException;
+	Document getRootPage() throws IOException;
+
+	Document getSubPage(String subpath) throws IOException;
 }
