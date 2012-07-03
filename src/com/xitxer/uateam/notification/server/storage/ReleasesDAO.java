@@ -1,44 +1,41 @@
 package com.xitxer.uateam.notification.server.storage;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.xitxer.uateam.notification.server.model.ReleaseEntry;
 
-public class ReleasesDAO {
+public class ReleasesDAO extends BaseDAO {
 
-	public static final String ENTITY_RELEASE = "Release";
-	public static final String PROPERTY_GROUP_NAME = "groupName";
-	public static final String PROPERTY_RELEASE_NAME = "releaseName";
-	public static final String PROPERTY_SEASON_NUMBER = "seasonNumber";
-	public static final String PROPERTY_EPISODE_NUMBER = "episodeNumber";
-	public static final String PROPERTY_GROUP_LINK = "groupLink";
-	public static final String PROPERTY_DETAILS_LINK = "detailsLink";
-	public static final String PROPERTY_TORRENT_LINK = "torrentLink";
-	public static final String PROPERTY_TORRENT_HD_LINK = "torrentHdLink";
-	public static final String PROPERTY_WATCH_ONLINE_LINK = "watchOnlineLink";
-
-	protected DatastoreService datastoreService;
+	private static final String ENTITY_RELEASE = "Release";
+	private static final String PROPERTY_GROUP_NAME = "groupName";
+	private static final String PROPERTY_RELEASE_NAME = "releaseName";
+	private static final String PROPERTY_SEASON_NUMBER = "seasonNumber";
+	private static final String PROPERTY_EPISODE_NUMBER = "episodeNumber";
+	private static final String PROPERTY_GROUP_LINK = "groupLink";
+	private static final String PROPERTY_DETAILS_LINK = "detailsLink";
+	private static final String PROPERTY_TORRENT_LINK = "torrentLink";
+	private static final String PROPERTY_TORRENT_HD_LINK = "torrentHdLink";
+	private static final String PROPERTY_WATCH_ONLINE_LINK = "watchOnlineLink";
 
 	public ReleasesDAO() {
-		datastoreService = DatastoreServiceFactory.getDatastoreService();
+		super();
 	}
 
-	public Key put(Entity entity) {
-		return datastoreService.put(entity);
+	@Override
+	public Key putEntity(Entity entity) {
+		return super.putEntity(entity);
 	}
 
 	public Key put(ReleaseEntry releaseEntry) {
-		return put(make(releaseEntry));
+		return putEntity(make(releaseEntry));
 	}
 
 	public Entity find(String groupLink) {
-		Query query = new Query(ENTITY_RELEASE);
-		query.addFilter(PROPERTY_GROUP_LINK, FilterOperator.EQUAL, groupLink);
-		return datastoreService.prepare(query).asSingleEntity();
+		return prepare(
+				new Query(ENTITY_RELEASE).addFilter(PROPERTY_GROUP_LINK,
+						FilterOperator.EQUAL, groupLink)).asSingleEntity();
 	}
 
 	public static Entity make(Entity entity, ReleaseEntry entry) {
