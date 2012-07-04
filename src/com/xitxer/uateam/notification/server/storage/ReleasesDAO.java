@@ -37,7 +37,8 @@ public class ReleasesDAO {
 
 	public Entity find(String groupLink) {
 		Query query = new Query(ENTITY_RELEASE);
-		query.addFilter(PROPERTY_GROUP_LINK, FilterOperator.EQUAL, groupLink);
+		query.setFilter(new Query.FilterPredicate(PROPERTY_GROUP_LINK,
+				FilterOperator.EQUAL, groupLink));
 		return datastoreService.prepare(query).asSingleEntity();
 	}
 

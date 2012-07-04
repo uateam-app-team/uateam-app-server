@@ -1,6 +1,5 @@
 package com.xitxer.uateam.notification.server.parser.sitesource;
 
-import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 
@@ -23,7 +22,7 @@ public class HttpSiteSource implements SiteSource {
 		return baseUrl + subUrl;
 	}
 
-	private Document getDocument(String url) throws IOException {
+	private Document getDocument(String url) throws Exception {
 		Document document = null;
 		long startTime = System.currentTimeMillis();
 		while (document == null) {
@@ -35,7 +34,7 @@ public class HttpSiteSource implements SiteSource {
 					e.fillInStackTrace();
 					throw e;
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.fillInStackTrace();
 				throw e;
 			}
@@ -44,12 +43,12 @@ public class HttpSiteSource implements SiteSource {
 	}
 
 	@Override
-	public Document getRootPage() throws IOException {
+	public Document getRootPage() throws Exception {
 		return getDocument(baseUrl);
 	}
 
 	@Override
-	public Document getSubPage(String subUrl) throws IOException {
+	public Document getSubPage(String subUrl) throws Exception {
 		return getDocument(getUrl(subUrl));
 	}
 }

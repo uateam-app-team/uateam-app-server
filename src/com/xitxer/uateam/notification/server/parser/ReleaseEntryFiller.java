@@ -1,15 +1,10 @@
 package com.xitxer.uateam.notification.server.parser;
 
-import java.io.IOException;
-
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.xitxer.uateam.notification.server.model.ReleaseEntry;
 import com.xitxer.uateam.notification.server.parser.exceptions.HtmlLayoutChangedException;
-import com.xitxer.uateam.notification.server.parser.exceptions.PageNotAvailableException;
-import com.xitxer.uateam.notification.server.parser.sitesource.SiteSource;
 
 public class ReleaseEntryFiller {
 
@@ -30,10 +25,12 @@ public class ReleaseEntryFiller {
 			Element element = elements.get(0);
 			if (TAG_DIV.equalsIgnoreCase(element.tagName())) {
 				try {
-					episodeEntry.setSeason(Integer.parseInt(element.text()
-							.split(REGEXP_REALEASE_NUMBERS)[0]));
-					episodeEntry.setEpisode(Integer.parseInt(element.text()
-							.split(REGEXP_REALEASE_NUMBERS)[1]));
+					String[] releaseNumberAndSeasonNumber = element.text()
+							.split(REGEXP_REALEASE_NUMBERS);
+					episodeEntry.setSeason(Integer
+							.parseInt(releaseNumberAndSeasonNumber[0]));
+					episodeEntry.setEpisode(Integer
+							.parseInt(releaseNumberAndSeasonNumber[1]));
 				} catch (Exception e) {
 					// do nothing because can be not series release
 				}
@@ -49,19 +46,6 @@ public class ReleaseEntryFiller {
 		} catch (Exception e) {
 			HtmlLayoutChangedException exception = new HtmlLayoutChangedException(
 					"Unknown change: " + e.toString());
-			exception.setStackTrace(e.getStackTrace());
-			throw exception;
-		}
-	}
-
-	public void parseReleaseLinks(SiteSource siteSource)
-			throws PageNotAvailableException {
-		try {
-			Document document = siteSource.getSubPage(episodeEntry
-					.getDetailsLink());
-		} catch (IOException e) {
-			PageNotAvailableException exception = new PageNotAvailableException(
-					"Sub page not found: " + episodeEntry.getDetailsLink());
 			exception.setStackTrace(e.getStackTrace());
 			throw exception;
 		}
