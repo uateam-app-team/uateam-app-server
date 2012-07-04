@@ -33,10 +33,10 @@ public class ReleasesDAO extends BaseDAO {
 	}
 
 	public Entity find(String groupLink) {
-		Query query = new Query(ENTITY_RELEASE);
-		query.setFilter(new Query.FilterPredicate(PROPERTY_GROUP_LINK,
-				FilterOperator.EQUAL, groupLink));
-		return datastoreService.prepare(query).asSingleEntity();
+		return prepare(
+				new Query(ENTITY_RELEASE).setFilter(new Query.FilterPredicate(
+						PROPERTY_GROUP_LINK, FilterOperator.EQUAL, groupLink)))
+				.asSingleEntity();
 	}
 
 	public static Entity make(Entity entity, ReleaseEntry entry) {

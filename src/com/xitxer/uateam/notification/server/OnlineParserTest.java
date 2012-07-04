@@ -24,9 +24,11 @@ public class OnlineParserTest extends HttpServlet {
 		resp.setCharacterEncoding("utf-8");
 		PrintWriter printWriter = resp.getWriter();
 		try {
-			List<ReleaseEntry> episodeEntries = new RecentReleasesParser(
-					new HttpSiteSource(UateamSiteUtils.URL_BASE)).get();
+			RecentReleasesParser releasesParser = new RecentReleasesParser(
+					new HttpSiteSource(UateamSiteUtils.URL_BASE));
+			List<ReleaseEntry> episodeEntries = releasesParser.get();
 			for (ReleaseEntry releaseEntry : episodeEntries) {
+				releasesParser.parseReleaseLinks(releaseEntry);
 				printWriter.println(releaseEntry);
 			}
 		} catch (Exception e) {

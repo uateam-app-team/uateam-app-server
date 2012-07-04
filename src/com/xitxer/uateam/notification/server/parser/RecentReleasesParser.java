@@ -15,7 +15,7 @@ import com.xitxer.uateam.notification.server.parser.sitesource.SiteSource;
 public class RecentReleasesParser {
 
 	private static final String QUERY_DIV_FRESHRELEASE = "div.freshrelease";
-	private static final String QUERY_DIV_LINKS = "div#releasebuttons > a[href]:has(img)";
+	private static final String QUERY_DIV_LINKS = "div.releasebuttons a[href]";
 	private static final String QUERY_DIV_ONLINE_CODE = "div#online_code param[name=flashvars]";
 
 	private static final String ATTR_HREF = "href";
@@ -63,14 +63,17 @@ public class RecentReleasesParser {
 		try {
 			Document document = siteSource.getSubPage(releaseEntry
 					.getDetailsLink());
+			System.out.println("document:" + document.outerHtml());
 			pageSource = document.outerHtml();
 			Elements elements;
 			elements = document.select(QUERY_DIV_ONLINE_CODE);
+			System.out.println("online elements:" + elements.outerHtml());
 			if (elements.size() > 0) {
 				releaseEntry.setWatchOnlineLink(elements.first().attr(
 						ATTR_VALUE));
 			}
 			elements = document.select(QUERY_DIV_LINKS);
+			System.out.println("link elements:" + elements.outerHtml());
 			if (elements.size() > 0) {
 				Element elementDownload = null, elementDownloadHd = null;
 				for(Element element:elements){

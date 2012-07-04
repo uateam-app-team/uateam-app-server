@@ -21,8 +21,9 @@ public class PreferencesDAO extends BaseDAO {
 
 	protected Entity getEntity(String key) {
 		return prepare(
-				new Query(ENTITY_PREFERENCE).addFilter(PROPERTY_KEY,
-						FilterOperator.EQUAL, key)).asSingleEntity();
+				new Query(ENTITY_PREFERENCE)
+						.setFilter(new Query.FilterPredicate(PROPERTY_KEY,
+								FilterOperator.EQUAL, key))).asSingleEntity();
 	}
 
 	protected PreferenceEntry getPrefence(String key) {
