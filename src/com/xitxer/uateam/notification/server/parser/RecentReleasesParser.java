@@ -2,6 +2,8 @@ package com.xitxer.uateam.notification.server.parser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -24,6 +26,8 @@ public class RecentReleasesParser {
 
 	private static final String SRC_IMG_HD = "/img/hd.jpg";
 	private static final String SRC_IMG_DOWNLOAD = "/img/download.png";
+
+	private static final String REGEXP_WATCH_ONLINE_FILE = "\\.*file\\=((http|https|ftp)\\://[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]{2,3}/[a-zA-Z0-9\\-\\._/\\\\]+\\.mp4)\\.*";
 
 	private SiteSource siteSource;
 
@@ -59,24 +63,25 @@ public class RecentReleasesParser {
 
 	public void parseReleaseLinks(ReleaseEntry releaseEntry)
 			throws PageNotAvailableException {
-		String pageSource = null;
 		try {
 			Document document = siteSource.getSubPage(releaseEntry
 					.getDetailsLink());
-			System.out.println("document:" + document.outerHtml());
-			pageSource = document.outerHtml();
 			Elements elements;
 			elements = document.select(QUERY_DIV_ONLINE_CODE);
-			System.out.println("online elements:" + elements.outerHtml());
 			if (elements.size() > 0) {
-				releaseEntry.setWatchOnlineLink(elements.first().attr(
-						ATTR_VALUE));
+				String stringWithFilePath = elements.first().attr(ATTR_VALUE);
+				if (stringWithFilePath != null) {
+					Pattern pattern = Pattern.compile(REGEXP_WATCH_ONLINE_FILE);
+					Matcher matcher = pattern.matcher(stringWithFilePath);
+					if (matcher.find()) {
+						releaseEntry.setWatchOnlineLink(matcher.group(1));
+					}
+				}
 			}
 			elements = document.select(QUERY_DIV_LINKS);
-			System.out.println("link elements:" + elements.outerHtml());
 			if (elements.size() > 0) {
 				Element elementDownload = null, elementDownloadHd = null;
-				for(Element element:elements){
+				for (Element element : elements) {
 					String atrrSrcValue = element.attr(ATTR_SRC);
 					if (SRC_IMG_DOWNLOAD.equals(atrrSrcValue)) {
 						elementDownload = element;
@@ -97,8 +102,7 @@ public class RecentReleasesParser {
 		} catch (Exception e) {
 			PageNotAvailableException exception = new PageNotAvailableException(
 					"Sub page not found or bad: "
-							+ releaseEntry.getDetailsLink() + "\nPage source:"
-							+ pageSource);
+							+ releaseEntry.getDetailsLink());
 			exception.setStackTrace(e.getStackTrace());
 			throw exception;
 		}

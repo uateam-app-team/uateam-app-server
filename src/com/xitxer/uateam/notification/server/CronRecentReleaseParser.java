@@ -28,8 +28,9 @@ public class CronRecentReleaseParser extends HttpServlet {
 		try {
 			ReleasesDAO dao = new ReleasesDAO();
 			Map<String, List<ReleaseEntry>> releasesParsed = new HashMap<String, List<ReleaseEntry>>();
-			for (ReleaseEntry releaseEntry : new RecentReleasesParser(
-					new HttpSiteSource(UateamSiteUtils.URL_BASE)).get()) {
+			RecentReleasesParser parser = new RecentReleasesParser(
+					new HttpSiteSource(UateamSiteUtils.URL_BASE))
+			for (ReleaseEntry releaseEntry : parser.get()) {
 				String key = releaseEntry.getGroupLink();
 				if (!releasesParsed.containsKey(key)) {
 					releasesParsed.put(key, new ArrayList<ReleaseEntry>());
@@ -59,6 +60,11 @@ public class CronRecentReleaseParser extends HttpServlet {
 				}
 			}
 			if (!releasesToInform.isEmpty()) {
+				for (List<ReleaseEntry> entries : releasesToInform.values()) {
+					for (ReleaseEntry entry : entries) {
+						parser.parseReleaseLinks(entry);
+					}
+				}
 				String subject = "New Releases", message = new Gson()
 						.toJson(releasesToInform);
 				EmailHelper.sendEmailMe(subject, message);
