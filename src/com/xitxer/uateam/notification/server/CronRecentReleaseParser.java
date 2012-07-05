@@ -29,7 +29,7 @@ public class CronRecentReleaseParser extends HttpServlet {
 			ReleasesDAO dao = new ReleasesDAO();
 			Map<String, List<ReleaseEntry>> releasesParsed = new HashMap<String, List<ReleaseEntry>>();
 			RecentReleasesParser parser = new RecentReleasesParser(
-					new HttpSiteSource(UateamSiteUtils.URL_BASE))
+					new HttpSiteSource(UateamSiteUtils.URL_BASE));
 			for (ReleaseEntry releaseEntry : parser.get()) {
 				String key = releaseEntry.getGroupLink();
 				if (!releasesParsed.containsKey(key)) {
