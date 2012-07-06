@@ -27,7 +27,7 @@ public class RecentReleasesParser {
 	private static final String SRC_IMG_HD = "/img/hd.jpg";
 	private static final String SRC_IMG_DOWNLOAD = "/img/download.png";
 
-	private static final String REGEXP_WATCH_ONLINE_FILE = "\\.*file\\=((http|https|ftp)\\://[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]{2,3}/[a-zA-Z0-9\\-\\._/\\\\]+\\.mp4)\\.*";
+	private static final String REGEXP_WATCH_ONLINE_FILE = ".*file\\=((http|https|ftp)\\://[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]{2,3}/[a-zA-Z0-9\\-\\._/\\\\]+\\.mp4).*";
 
 	private SiteSource siteSource;
 
