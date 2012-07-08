@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.xitxer.uateam.notification.server.helpers.EmailHelper;
 import com.xitxer.uateam.notification.server.model.ReleaseEntry;
 import com.xitxer.uateam.notification.server.parser.RecentReleasesParser;
+import com.xitxer.uateam.notification.server.parser.exceptions.PageNotAvailableException;
 import com.xitxer.uateam.notification.server.parser.sitesource.HttpSiteSource;
 import com.xitxer.uateam.notification.server.storage.ReleasesDAO;
 import com.xitxer.uateam.notification.server.utils.UateamSiteUtils;
@@ -62,7 +63,12 @@ public class CronRecentReleaseParser extends HttpServlet {
 			if (!releasesToInform.isEmpty()) {
 				for (List<ReleaseEntry> entries : releasesToInform.values()) {
 					for (ReleaseEntry entry : entries) {
-						parser.parseReleaseLinks(entry);
+						try{
+							parser.parseReleaseLinks(entry);
+						} catch (PageNotAvailableException e) {
+							// Do nothing, because we want to provide to user
+							// information
+						}
 					}
 				}
 				String subject = "New Releases", message = new Gson()
