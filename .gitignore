@@ -1,4 +1,4 @@
-*.class
-/war/WEB-INF/classes
-/war/WEB-INF/appengine-generated
-/target
+target
+.settings
+/.project
+/.classpath
