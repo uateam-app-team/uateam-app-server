@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.xitxer.uateam.notification.server.model.ReleaseEntry;
-import com.xitxer.uateam.notification.server.parser.RecentReleasesParser;
-import com.xitxer.uateam.notification.server.parser.sitesource.HttpSiteSource;
+import com.xitxer.uateam.notification.core.model.ReleaseEntry;
+import com.xitxer.uateam.notification.core.parser.RecentReleasesParser;
+import com.xitxer.uateam.notification.core.parser.sitesource.HttpSiteSource;
 import com.xitxer.uateam.notification.server.utils.UateamSiteUtils;
 
 @SuppressWarnings("serial")

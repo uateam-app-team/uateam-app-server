@@ -4,7 +4,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
-import com.xitxer.uateam.notification.server.model.ReleaseEntry;
+import com.xitxer.uateam.notification.core.model.ReleaseEntry;
 
 public class ReleasesDAO extends BaseDAO {
 

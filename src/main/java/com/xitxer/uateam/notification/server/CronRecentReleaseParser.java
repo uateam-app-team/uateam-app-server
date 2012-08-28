@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.datastore.Entity;
 import com.google.gson.Gson;
+import com.xitxer.uateam.notification.core.model.ReleaseEntry;
+import com.xitxer.uateam.notification.core.parser.RecentReleasesParser;
+import com.xitxer.uateam.notification.core.parser.exceptions.PageNotAvailableException;
+import com.xitxer.uateam.notification.core.parser.sitesource.HttpSiteSource;
 import com.xitxer.uateam.notification.server.helpers.EmailHelper;
-import com.xitxer.uateam.notification.server.model.ReleaseEntry;
-import com.xitxer.uateam.notification.server.parser.RecentReleasesParser;
-import com.xitxer.uateam.notification.server.parser.exceptions.PageNotAvailableException;
-import com.xitxer.uateam.notification.server.parser.sitesource.HttpSiteSource;
 import com.xitxer.uateam.notification.server.storage.ReleasesDAO;
 import com.xitxer.uateam.notification.server.utils.UateamSiteUtils;
 

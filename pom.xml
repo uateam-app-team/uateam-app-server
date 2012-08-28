@@ -31,8 +31,7 @@
 			<version>1.1</version>
 		</dependency>
 
-		<!-- J2EE Servlet API. We need it to compile IndexServlet class. You can probably remove
-      it, if you don't explicitly use Servlets -->
+		<!-- J2EE Servlet API. We need it to compile IndexServlet class. You can probably remove it, if you don't explicitly use Servlets -->
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-servlet_2.5_spec</artifactId>
