@@ -45,7 +45,9 @@ public class CronRecentReleaseParser extends HttpServlet {
 				ReleaseEntry releaseEntry = ReleasesDAO.make(entity);
 				List<ReleaseEntry> entries = entry.getValue();
 				if (releaseEntry != null) {
-					entries = entries.subList(0, entries.indexOf(releaseEntry));
+					if(entries.contains(releaseEntry)){
+						entries = entries.subList(0, entries.indexOf(releaseEntry));
+					}
 					if (entries.size() > 0) {
 						releaseEntry = entries.get(0);
 						releasesToInform.put(entry.getKey(), entries);
