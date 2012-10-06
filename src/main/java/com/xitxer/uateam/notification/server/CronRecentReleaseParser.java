@@ -45,8 +45,9 @@ public class CronRecentReleaseParser extends HttpServlet {
 				ReleaseEntry releaseEntry = ReleasesDAO.make(entity);
 				List<ReleaseEntry> entries = entry.getValue();
 				if (releaseEntry != null) {
-					if(entries.contains(releaseEntry)){
-						entries = entries.subList(0, entries.indexOf(releaseEntry));
+					if (entries.contains(releaseEntry)) {
+						entries = entries.subList(0,
+								entries.indexOf(releaseEntry));
 					}
 					if (entries.size() > 0) {
 						releaseEntry = entries.get(0);
@@ -65,7 +66,7 @@ public class CronRecentReleaseParser extends HttpServlet {
 			if (!releasesToInform.isEmpty()) {
 				for (List<ReleaseEntry> entries : releasesToInform.values()) {
 					for (ReleaseEntry entry : entries) {
-						try{
+						try {
 							parser.parseReleaseLinks(entry);
 						} catch (PageNotAvailableException e) {
 							// Do nothing, because we want to provide to user
@@ -76,8 +77,10 @@ public class CronRecentReleaseParser extends HttpServlet {
 				String subject = "New Releases", message = new Gson()
 						.toJson(releasesToInform);
 				EmailHelper.sendEmailMe(subject, message);
-				EmailHelper.sendEmail(EmailHelper.PARTNER_ADDRESS,
-						EmailHelper.PARTNER_ADDRESS, subject, message);
+				EmailHelper.sendEmail(EmailHelper.PARTNER_I_ADDRESS,
+						EmailHelper.PARTNER_I_ADDRESS, subject, message);
+				EmailHelper.sendEmail(EmailHelper.PARTNER_II_ADDRESS,
+						EmailHelper.PARTNER_I_ADDRESS, subject, message);
 			}
 		} catch (Exception e) {
 			EmailHelper.sendEmailException(e);
