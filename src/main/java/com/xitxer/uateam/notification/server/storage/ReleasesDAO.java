@@ -15,8 +15,6 @@ public class ReleasesDAO extends BaseDAO {
 	private static final String PROPERTY_EPISODE_NUMBER = "episodeNumber";
 	private static final String PROPERTY_GROUP_LINK = "groupLink";
 	private static final String PROPERTY_DETAILS_LINK = "detailsLink";
-	private static final String PROPERTY_TORRENT_LINK = "torrentLink";
-	private static final String PROPERTY_TORRENT_HD_LINK = "torrentHdLink";
 	private static final String PROPERTY_WATCH_ONLINE_LINK = "watchOnlineLink";
 
 	public ReleasesDAO() {
@@ -49,8 +47,6 @@ public class ReleasesDAO extends BaseDAO {
 		entity.setProperty(PROPERTY_EPISODE_NUMBER, entry.getEpisode());
 		entity.setProperty(PROPERTY_GROUP_LINK, entry.getGroupLink());
 		entity.setProperty(PROPERTY_DETAILS_LINK, entry.getDetailsLink());
-		entity.setProperty(PROPERTY_TORRENT_LINK, entry.getTorrentLink());
-		entity.setProperty(PROPERTY_TORRENT_HD_LINK, entry.getTorrentHdLink());
 		entity.setProperty(PROPERTY_WATCH_ONLINE_LINK,
 				entry.getWatchOnlineLink());
 		return entity;
@@ -71,9 +67,6 @@ public class ReleasesDAO extends BaseDAO {
 		entry.setEpisode((Long) entity.getProperty(PROPERTY_EPISODE_NUMBER));
 		entry.setGroupLink((String) entity.getProperty(PROPERTY_GROUP_LINK));
 		entry.setDetailsLink((String) entity.getProperty(PROPERTY_DETAILS_LINK));
-		entry.setTorrentLink((String) entity.getProperty(PROPERTY_TORRENT_LINK));
-		entry.setTorrentHdLink((String) entity
-				.getProperty(PROPERTY_TORRENT_HD_LINK));
 		entry.setWatchOnlineLink((String) entity
 				.getProperty(PROPERTY_WATCH_ONLINE_LINK));
 		return entry;
