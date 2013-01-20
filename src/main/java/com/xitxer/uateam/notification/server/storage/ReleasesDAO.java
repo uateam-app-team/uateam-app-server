@@ -15,7 +15,6 @@ public class ReleasesDAO extends BaseDAO {
 	private static final String PROPERTY_EPISODE_NUMBER = "episodeNumber";
 	private static final String PROPERTY_GROUP_LINK = "groupLink";
 	private static final String PROPERTY_DETAILS_LINK = "detailsLink";
-	private static final String PROPERTY_WATCH_ONLINE_LINK = "watchOnlineLink";
 
 	public ReleasesDAO() {
 		super();
@@ -32,9 +31,8 @@ public class ReleasesDAO extends BaseDAO {
 
 	public Entity find(String groupLink) {
 		return prepare(
-				new Query(ENTITY_RELEASE).setFilter(new Query.FilterPredicate(
-						PROPERTY_GROUP_LINK, FilterOperator.EQUAL, groupLink)))
-				.asSingleEntity();
+				new Query(ENTITY_RELEASE).setFilter(new Query.FilterPredicate(PROPERTY_GROUP_LINK,
+						FilterOperator.EQUAL, groupLink))).asSingleEntity();
 	}
 
 	public static Entity make(Entity entity, ReleaseEntry entry) {
@@ -47,8 +45,6 @@ public class ReleasesDAO extends BaseDAO {
 		entity.setProperty(PROPERTY_EPISODE_NUMBER, entry.getEpisode());
 		entity.setProperty(PROPERTY_GROUP_LINK, entry.getGroupLink());
 		entity.setProperty(PROPERTY_DETAILS_LINK, entry.getDetailsLink());
-		entity.setProperty(PROPERTY_WATCH_ONLINE_LINK,
-				entry.getWatchOnlineLink());
 		return entity;
 	}
 
@@ -67,8 +63,6 @@ public class ReleasesDAO extends BaseDAO {
 		entry.setEpisode((Long) entity.getProperty(PROPERTY_EPISODE_NUMBER));
 		entry.setGroupLink((String) entity.getProperty(PROPERTY_GROUP_LINK));
 		entry.setDetailsLink((String) entity.getProperty(PROPERTY_DETAILS_LINK));
-		entry.setWatchOnlineLink((String) entity
-				.getProperty(PROPERTY_WATCH_ONLINE_LINK));
 		return entry;
 	}
 }

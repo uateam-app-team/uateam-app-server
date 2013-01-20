@@ -1,4 +1,4 @@
-package com.xitxer.uateam.notification.server.helpers;
+package com.xitxer.uateam.notification.server.helper;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -17,15 +17,12 @@ public class EmailHelper {
 	}
 
 	public static final String ADMINS = "admins";
-	public static final String MY_ADDRESS = "z" + "i" + "p" + "u" + "4" + "."
-			+ "p" + "o" + "s" + "t" + "@" + "g" + "m" + "a" + "i" + "l" + "."
-			+ "c" + "o" + "m";
-	public static final String PARTNER_I_ADDRESS = "c" + "o" + "n" + "c" + "u"
-			+ "r" + "o" + "r" + "@" + "g" + "m" + "a" + "i" + "l" + "." + "c"
-			+ "o" + "m";
-	public static final String PARTNER_II_ADDRESS = "b" + "r" + "e" + "a" + "g"
-			+ "g" + "e" + "y" + "@" + "g" + "m" + "a" + "i" + "l" + "." + "c"
-			+ "o" + "m";
+	public static final String MY_ADDRESS = "z" + "i" + "p" + "u" + "4" + "." + "p" + "o" + "s" + "t" + "@" + "g" + "m"
+			+ "a" + "i" + "l" + "." + "c" + "o" + "m";
+	public static final String PARTNER_I_ADDRESS = "c" + "o" + "n" + "c" + "u" + "r" + "o" + "r" + "@" + "g" + "m"
+			+ "a" + "i" + "l" + "." + "c" + "o" + "m";
+	public static final String PARTNER_II_ADDRESS = "b" + "r" + "e" + "a" + "g" + "g" + "e" + "y" + "@" + "g" + "m"
+			+ "a" + "i" + "l" + "." + "c" + "o" + "m";
 	public static final String MY_TITLE = "uateam-notifier admin";
 
 	public static void sendEmailException(Throwable throwable) {
@@ -38,24 +35,21 @@ public class EmailHelper {
 		}
 	}
 
-	public static void sendEmailMe(String subject, String message)
-			throws UnsupportedEncodingException, MessagingException {
+	public static void sendEmailMe(String subject, String message) throws UnsupportedEncodingException,
+			MessagingException {
 		sendEmail(ADMINS, ADMINS, subject, message);
 	}
 
-	public static void sendEmail(String recipientAddress, String recipientName,
-			String subject, String message)
+	public static void sendEmail(String recipientAddress, String recipientName, String subject, String message)
 			throws UnsupportedEncodingException, MessagingException {
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		Message msg = new MimeMessage(session);
 		msg.setFrom(new InternetAddress(MY_ADDRESS, MY_TITLE));
 		if (ADMINS.equals(recipientAddress)) {
-			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-					recipientAddress));
+			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientAddress));
 		} else {
-			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-					recipientAddress, recipientName));
+			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientAddress, recipientName));
 		}
 		msg.setSubject(subject);
 		msg.setText(message);
