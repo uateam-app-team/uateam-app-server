@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.xitxer.uateam.notification.core.model.ReleaseEntry;
 import com.xitxer.uateam.notification.core.parser.RecentReleasesParser;
 import com.xitxer.uateam.notification.core.parser.sitesource.HttpSiteSource;
-import com.xitxer.uateam.notification.core.util.UateamSiteUtils;
+import com.xitxer.uateam.notification.core.util.UateamSiteUtil;
 import com.xitxer.uateam.notification.server.helper.EmailHelper;
 import com.xitxer.uateam.notification.server.storage.ReleasesDAO;
 
@@ -27,7 +27,7 @@ public class CronRecentReleaseParser extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			Map<String, List<ReleaseEntry>> releasesParsed = new HashMap<String, List<ReleaseEntry>>();
-			RecentReleasesParser parser = new RecentReleasesParser(new HttpSiteSource(UateamSiteUtils.URL_BASE));
+			RecentReleasesParser parser = new RecentReleasesParser(new HttpSiteSource(UateamSiteUtil.URL_BASE));
 			for (ReleaseEntry releaseEntry : parser.get()) {
 				String key = releaseEntry.getGroupLink();
 				if (!releasesParsed.containsKey(key)) {

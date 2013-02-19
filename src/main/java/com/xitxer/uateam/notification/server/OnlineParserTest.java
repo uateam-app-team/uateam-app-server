@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.xitxer.uateam.notification.core.parser.RecentReleasesParser;
 import com.xitxer.uateam.notification.core.parser.sitesource.HttpSiteSource;
-import com.xitxer.uateam.notification.core.util.UateamSiteUtils;
+import com.xitxer.uateam.notification.core.util.UateamSiteUtil;
 
 public class OnlineParserTest extends HttpServlet {
 	private static final long serialVersionUID = 6990633723696248267L;
@@ -21,7 +21,7 @@ public class OnlineParserTest extends HttpServlet {
 		resp.setCharacterEncoding("utf-8");
 		PrintWriter printWriter = resp.getWriter();
 		try {
-			RecentReleasesParser releasesParser = new RecentReleasesParser(new HttpSiteSource(UateamSiteUtils.URL_BASE));
+			RecentReleasesParser releasesParser = new RecentReleasesParser(new HttpSiteSource(UateamSiteUtil.URL_BASE));
 			printWriter.print(releasesParser.parseReleasesLinks(releasesParser.get()));
 		} catch (Exception e) {
 			e.printStackTrace(printWriter);
