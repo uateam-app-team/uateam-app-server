@@ -63,7 +63,7 @@ public class CronRecentReleaseParser extends HttpServlet {
 
 			if (!releasesToInform.isEmpty()) {
 				for (List<ReleaseEntry> entries : releasesToInform.values()) {
-					parser.parseReleasesLinks(entries);
+					parser.parseReleaseLinks(entries);
 				}
 				String subject = "New Releases", message = new Gson().toJson(releasesToInform);
 				EmailHelper.sendEmailMe(subject, message);

@@ -22,7 +22,7 @@ public class OnlineParserTest extends HttpServlet {
 		PrintWriter printWriter = resp.getWriter();
 		try {
 			RecentReleasesParser releasesParser = new RecentReleasesParser(new HttpSiteSource(UateamSiteUtil.URL_BASE));
-			printWriter.print(releasesParser.parseReleasesLinks(releasesParser.get()));
+			printWriter.print(releasesParser.parseReleaseLinks(releasesParser.get()));
 		} catch (Exception e) {
 			e.printStackTrace(printWriter);
 		}
